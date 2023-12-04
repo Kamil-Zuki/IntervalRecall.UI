@@ -1,0 +1,11 @@
+﻿@page "/responce/{correct:int}/{incorrect:int}"
+<h3>Responce</h3>
+<h4>Amount of correct answers:@Correct</h4>
+<h4>Amount of incorrect answers:@Incorrect</h4>
+
+@code {
+    [Parameter]
+    public int Correct { get; set; }
+    [Parameter]
+    public int Incorrect { get; set; }
+}

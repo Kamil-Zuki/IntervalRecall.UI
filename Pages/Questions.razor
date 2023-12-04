@@ -1,0 +1,119 @@
+﻿@page "/questions/{questiongroupid:guid}"
+@page "/questions"
+@inherits QuestionsBase
+@inject NavigationManager NavigationManager
+
+<button class="btn btn-primary" @onclick="TakePairs">Submit All Pairs</button>
+
+<div class="container mt-5">
+    <!-- ... existing code ... -->
+    @if (Questions == null)
+    {
+        <h3>Loading questions...</h3>
+    }
+    else
+    {
+        @foreach (var questionGroup in Questions)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>@questionGroup.Title</h4>
+                </div>
+                <div class="card-body">
+                    @foreach (var question in questionGroup.Questions)
+                    {
+                        <div class="mb-4">
+                            <h5>@question.Text</h5>
+                            <div class="form-check">
+                                @foreach (var answer in question.Answers)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="@($"checkbox_{answer.AnswerId}")" @onchange="() => ToggleAnswer(questionGroup.QuestionGroupId, question.QuestionId, answer.AnswerId)"
+                                               disabled="@isSubmissionInProgress">
+                                        <label class="form-check-label" for="@($"checkbox_{answer.AnswerId}")">
+                                            @answer.Value
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+    <!-- Display the result object -->
+
+</div>
+
+@code {
+    Dictionary<(Guid, Guid), List<Guid>> selectedAnswers = new Dictionary<(Guid, Guid), List<Guid>>();
+    SubmissionResult? resultObject = new();
+    bool isSubmissionInProgress = false;
+
+    void ToggleAnswer(Guid questionGroupId, Guid questionId, Guid answerId)
+    {
+        var key = (questionGroupId, questionId);
+
+        if (!selectedAnswers.ContainsKey(key))
+        {
+            selectedAnswers[key] = new List<Guid>();
+        }
+
+        if (selectedAnswers[key].Contains(answerId))
+        {
+            selectedAnswers[key].Remove(answerId);
+        }
+        else
+        {
+            selectedAnswers[key].Add(answerId);
+        }
+    }
+
+    async Task TakePairs()
+    {
+        if (!isSubmissionInProgress)
+        {
+            // Prepare data for API
+            var pairs = selectedAnswers.Select(pair => new
+            {
+                questionId = pair.Key.Item2,
+                answerIds = pair.Value
+            }).ToList();
+
+
+            try
+            {
+                isSubmissionInProgress = true;
+                var response = await QuestionService.GetAnswersAsync(pairs.Select(pair => new InUserResponceDTO
+                    {
+                        QuestionId = pair.questionId,
+                        AnswerIds = pair.answerIds
+                    }).ToList());
+
+                if (response.IsSuccessStatusCode)
+                {
+                    resultObject = await response.Content.ReadFromJsonAsync<SubmissionResult>();
+                    if (resultObject != null)
+                        NavigationManager.NavigateTo($"/responce/{resultObject.Correct}/{resultObject.Incorrect}");
+                }
+                else
+                {
+                    // Handle failure
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Failed with status code: {response.StatusCode}. Error message: {errorMessage}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                isSubmissionInProgress = false;
+            }
+        }
+    }
+}
