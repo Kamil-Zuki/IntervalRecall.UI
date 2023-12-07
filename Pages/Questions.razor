@@ -6,7 +6,6 @@
 <button class="btn btn-primary" @onclick="TakePairs">Submit All Pairs</button>
 
 <div class="container mt-5">
-    <!-- ... existing code ... -->
     @if (Questions == null)
     {
         <h3>Loading questions...</h3>
@@ -42,7 +41,6 @@
             </div>
         }
     }
-    <!-- Display the result object -->
 
 </div>
 
@@ -99,7 +97,6 @@
                 }
                 else
                 {
-                    // Handle failure
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"Failed with status code: {response.StatusCode}. Error message: {errorMessage}");
                 }
@@ -107,7 +104,6 @@
             }
             catch (Exception ex)
             {
-                // Handle exception
                 Console.WriteLine(ex.Message);
             }
             finally
