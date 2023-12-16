@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\interval-recall\interval-recall.Models\interval-recall.Models.csproj" />
+    <ProjectReference Include="..\interval-recall\interval-recall.Models\IntervalRecall.Models.csproj" />
   </ItemGroup>
 
 </Project>

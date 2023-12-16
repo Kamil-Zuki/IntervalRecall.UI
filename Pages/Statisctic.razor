@@ -1,0 +1,82 @@
+﻿@* @page "/statistic" *@
+@page "/statistic/{questionGroupId:guid}"
+@inherits StatisticBase
+
+<div class="container mt-5">
+    @if (QuestionGroupStatistics == null)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                @* <span class="sr-only">Loading...</span> *@
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var questionGroup in QuestionGroupStatistics)
+        {
+            <div class="row">
+                <div class="col">
+                    <h4>@questionGroup.Title</h4>
+                </div>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="text-center">Text</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">Interval</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">Repetitions</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">EasyFactor</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">RepetitionDate</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">Step</h5>
+                        </div>
+                        <div class="col">
+                            <h5 class="text-center">State</h5>
+                        </div>
+
+                    </div>
+
+
+                    @foreach (var question in questionGroup.Questions)
+                    {
+                        <div class="row">
+                            <div class="col text-center">
+                                @question.Text
+                            </div>
+                            <div class="col text-center">
+                                @question.Interval
+                            </div>
+                            <div class="col text-center">
+                                @question.Repetitions
+                            </div>
+                            <div class="col text-center">
+                                @question.EasyFactor
+                            </div>
+                            <div class="col text-center">
+                                @question.RepetitionDate
+                            </div>
+                            <div class="col text-center">
+                                @question.Step
+                            </div>
+                            <div class="col text-center">
+                                @question.State
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+

@@ -8,8 +8,8 @@ namespace IntervalRecall.UI.Pages
     {
         [Inject]
         public IQuestionGroupService QuestionGroupService { get; set; }
-        //public IQuestionService QuestionService { get; set; }
 
+        
         public List<OutQuestionGroupDTO> QuestionGroups { get; set; }
         //public List<OutRecallQuestionGroupDTO> RecallQuestions { get; set; }
 

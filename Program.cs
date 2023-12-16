@@ -16,6 +16,7 @@ namespace IntervalRecall.UI
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7061/") });
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<IQuestionGroupService, QuestionGroupService>();
+            builder.Services.AddScoped<IStatisticService, StatisticService>();
 
             await builder.Build().RunAsync();
         }

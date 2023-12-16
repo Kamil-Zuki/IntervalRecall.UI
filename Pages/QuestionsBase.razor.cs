@@ -9,7 +9,8 @@ namespace IntervalRecall.UI.Pages
         [Inject]
         public IQuestionService QuestionService { get; set; }
 
-
+        [Inject]
+        public IStatisticService StatisticService { get; set; }
 
         [Parameter]
         public Guid? QuestionGroupId { get; set; }  // Add a parameter to receive the questionGroupId
@@ -21,5 +22,5 @@ namespace IntervalRecall.UI.Pages
 
             Questions = await QuestionService.GetRecallQuestions(QuestionGroupId);
         }
-    }
+    }   
 }
