@@ -55,7 +55,7 @@
                                 @question.Text
                             </div>
                             <div class="col text-center">
-                                @question.Interval
+                                @question.Interval.ToString("dd\\.hh\\:mm")
                             </div>
                             <div class="col text-center">
                                 @question.Repetitions
@@ -67,7 +67,7 @@
                                 @question.RepetitionDate
                             </div>
                             <div class="col text-center">
-                                @question.Step
+                                @question.Step.ToString(@"hh\:mm")
                             </div>
                             <div class="col text-center">
                                 @question.State
