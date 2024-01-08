@@ -25,5 +25,17 @@ namespace IntervalRecall.UI.Services
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        public async Task<HttpResponseMessage> UpdateQuestionGroup(UpdateQuestionGroupDTO updateQuestionGroupDTO) 
+        {
+            try
+            {
+                return await httpClient.PatchAsJsonAsync($"api/v1/question-groups", updateQuestionGroupDTO);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
     }
 }

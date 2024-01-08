@@ -15,12 +15,11 @@ namespace IntervalRecall.UI.Pages
         [Parameter]
         public Guid? QuestionGroupId { get; set; }  // Add a parameter to receive the questionGroupId
 
-        public List<OutRecallQuestionGroupDTO> Questions { get; set; }
+        public List<OutRecallQuestionGroupDTO> QuestionGroups { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-
-            Questions = await QuestionService.GetRecallQuestions(QuestionGroupId);
+            QuestionGroups = await QuestionService.GetRecallQuestions(QuestionGroupId);
         }
     }   
 }

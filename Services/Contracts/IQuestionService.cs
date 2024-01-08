@@ -6,6 +6,7 @@ namespace IntervalRecall.UI.Services.Contracts
     {
         Task<List<OutRecallQuestionGroupDTO>> GetRecallQuestions(Guid? questionGroupId);
         Task<HttpResponseMessage> GetAnswersAsync(List<InUserResponceDTO> userResponces);
+        Task<QuestionsAmountInfo> GetQuestionsAmountAsync(Guid questionGroupId);
 
     }
 }

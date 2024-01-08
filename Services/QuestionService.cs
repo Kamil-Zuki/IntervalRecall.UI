@@ -33,5 +33,10 @@ namespace IntervalRecall.UI.Services
             return await httpClient.PostAsJsonAsync($"api/v1/questions/answers", userResponces);
         }
 
+        public async Task<QuestionsAmountInfo> GetQuestionsAmountAsync(Guid questionGroupId)
+        {
+            return await httpClient.GetFromJsonAsync<QuestionsAmountInfo>($"api/v1/questions/amount?questionGroupId={questionGroupId}");
+        }
+
     }
 }
