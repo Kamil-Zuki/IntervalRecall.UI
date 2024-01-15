@@ -16,10 +16,21 @@ namespace IntervalRecall.UI.Pages
         public Guid? QuestionGroupId { get; set; }  // Add a parameter to receive the questionGroupId
 
         public List<OutRecallQuestionGroupDTO> QuestionGroups { get; set; }
-
+        public List<QuestionsAmountInfoWithGroupId> QuestionsAmountInfo { get; set; }
         protected override async Task OnInitializedAsync()
         {
             QuestionGroups = await QuestionService.GetRecallQuestions(QuestionGroupId);
+            QuestionsAmountInfo = new();
+            foreach (var group in QuestionGroups)
+            {
+                var questionAmountInfo = await QuestionService.GetQuestionsAmountAsync(group.Id);
+                QuestionsAmountInfo.Add(new QuestionsAmountInfoWithGroupId()
+                {
+                    GroupId = group.Id,
+                    NewQuestions = questionAmountInfo.NewQuestions,
+                    LearnAndGraduatedQuestions = questionAmountInfo.LearnAndGraduatedQuestions
+                });
+            }
         }
-    }   
+    }
 }

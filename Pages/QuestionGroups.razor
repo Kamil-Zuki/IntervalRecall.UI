@@ -29,6 +29,7 @@
             <div class="row">
                 @foreach (var questionGroup in QuestionGroups)
                 {
+                    var questionAmountInfo = QuestionsAmountInfo.FirstOrDefault(q => q.GroupId == questionGroup.Id);
                     <div class="row">
                         <div class="row border-bottom justify-content-center">
                             <div class="col text-center" @onclick="() => HandleGroupClick(questionGroup.Id)">
@@ -37,10 +38,10 @@
                                 </h4>
                             </div>
                             <div class="col text-center">
-                                <h4></h4>
+                                <h4>@questionAmountInfo!.NewQuestions</h4>
                             </div>
                             <div class="col text-center">
-
+                                <h4>@questionAmountInfo!.LearnAndGraduatedQuestions</h4>
                             </div>
                         </div>
                     </div>
@@ -50,25 +51,8 @@
     }
 </div>
 
-
-
 @code {
 
-
-
-    private async Task<QuestionsAmountInfo> GetQuestionsAmountInfoAsync(Guid questionGroupId)
-    {
-        try
-        {
-            var asd = await QuestionService.GetQuestionsAmountAsync(questionGroupId);
-            return await QuestionService.GetQuestionsAmountAsync(questionGroupId);
-        }
-        catch(Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-        
-    }
 
     private void HandleGroupClick(Guid questionGroupId)
     {

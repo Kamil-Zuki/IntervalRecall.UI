@@ -13,12 +13,18 @@ namespace IntervalRecall.UI.Pages
         public IQuestionService QuestionService { get; set; }
 
         public List<OutQuestionGroupDTO> QuestionGroups { get; set; }
-        //public List<OutRecallQuestionGroupDTO> RecallQuestions { get; set; }
 
+        
         protected override async Task OnInitializedAsync()
         {
             QuestionGroups = await QuestionGroupService.GetGroups();
-            //RecallQuestions = await QuestionService.GetRecallQuestions();
+
+            foreach(var group in QuestionGroups)
+            {
+                var questionAmountInfo = await QuestionService.GetQuestionsAmountAsync(group.Id);
+                
+            }
+            
         }
     }
 }
