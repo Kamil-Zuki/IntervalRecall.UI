@@ -15,67 +15,38 @@
     {
         @foreach (var questionGroup in QuestionGroupStatistics)
         {
-            <div class="row">
-                <div class="col">
-                    <h4>@questionGroup.Title</h4>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="text-center">Text</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">Interval</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">Repetitions</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">EasyFactor</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">RepetitionDate</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">Step</h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center">State</h5>
-                        </div>
-
-                    </div>
-
-
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Text</th>
+                        <th scope="col">Interval</th>
+                        <th scope="col">Repetitions</th>
+                        <th scope="col">EasyFactor</th>
+                        <th scope="col">RepetitionDate</th>
+                        <th scope="col">Step</th>
+                        <th scope="col">State</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach (var question in questionGroup.Questions)
                     {
-                        <div class="row">
-                            <div class="col text-center">
-                                @question.Text
-                            </div>
-                            <div class="col text-center">
-                                @question.Interval.ToString("dd\\.hh\\:mm")
-                            </div>
-                            <div class="col text-center">
-                                @question.Repetitions
-                            </div>
-                            <div class="col text-center">
-                                @question.EasyFactor
-                            </div>
-                            <div class="col text-center">
-                                @question.RepetitionDate
-                            </div>
-                            <div class="col text-center">
-                                @question.Step.ToString(@"hh\:mm")
-                            </div>
-                            <div class="col text-center">
-                                @question.State
-                            </div>
-                        </div>
+                        <tr>
+                            <th scope="row">@question.Text</th>
+                            <td>@question.Interval.ToString("dd\\.hh\\:mm")</td>
+                            <td>@question.Repetitions</td>
+                            <td>@question.EasyFactor</td>
+                            <td>@question.RepetitionDate</td>
+                            <td>@question.Step.ToString(@"hh\:mm")</td>
+                            <td>@question.State</td>
+                        </tr>
+                        i++;
                     }
-                </div>
-            </div>
+                </tbody>
+            </table>
         }
     }
 </div>
 
+@code {
+    private int i = 0;
+}
