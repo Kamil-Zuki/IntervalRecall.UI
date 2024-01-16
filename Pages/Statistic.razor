@@ -18,6 +18,7 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
+                        <th scope="col">#</th>
                         <th scope="col">Text</th>
                         <th scope="col">Interval</th>
                         <th scope="col">Repetitions</th>
@@ -31,7 +32,8 @@
                     @foreach (var question in questionGroup.Questions)
                     {
                         <tr>
-                            <th scope="row">@question.Text</th>
+                            <th scope="row">@i</th>
+                            <td>@question.Text</td>
                             <td>@question.Interval.ToString("dd\\.hh\\:mm")</td>
                             <td>@question.Repetitions</td>
                             <td>@question.EasyFactor</td>
@@ -48,5 +50,5 @@
 </div>
 
 @code {
-    private int i = 0;
+    private int i = 1;
 }

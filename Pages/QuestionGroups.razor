@@ -17,6 +17,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col">Exams</th>
                     <th scope="col">New</th>
                     <th scope="col">Learn</th>
@@ -28,7 +29,8 @@
                 {
                     var questionAmountInfo = QuestionsAmountInfo.FirstOrDefault(q => q.GroupId == questionGroup.Id);
                     <tr>
-                        <th @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</th>
+                        <th scope="row">@i</th>
+                        <td @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</td>
                         <td>@questionAmountInfo!.NewQuestions</td>
                         <td>@questionAmountInfo!.LearnAndGraduatedQuestions</td>
                         <td><button onclick="" type="button" class="btn btn-primary">Setting</button></td>
@@ -41,7 +43,7 @@
 </div>
 
 @code {
-    private int i = 0;
+    private int i = 1;
     private void ClickSettingButton(Guid questionGroupId)
     {
         NavigationManager.NavigateTo($"/questions/{questionGroupId}");

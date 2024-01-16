@@ -14,38 +14,32 @@
     }
     else
     {
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h4>Groups</h4>
-                </div>
-            </div>
-            <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Groups</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var questionGroup in QuestionGroups)
                 {
-                    <div class="row">
-                        <div class="row border-bottom justify-content-center">
-                            <div class="row ">
-                                <div class="col" @onclick="() => HandleGroupClick(questionGroup.Id)">
-                                    <h5>
-                                        @questionGroup.Title
-                                    </h5>
-                                </div>
-                                <div class="col">
-                                    <button class="alert-danger" @onclick="() => RemoveStatisticAsync(questionGroup.Id)">Remove progress</button>
-                                </div>
+                    <tr>
+                        <th scope="row">@i</th>
+                        <th @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</th>
+                        <td><button type="button" class="btn btn-danger" @onclick="() => RemoveStatisticAsync(questionGroup.Id)">Remove progress</button>
 
-                            </div>
-                        </div>
-                    </div>
+                    </td>
+                    </tr>
+                    i++;
                 }
-            </div>
-        </div>
+            </tbody>
+        </table>
     }
 </div>
 
 @code {
-
+    private int i = 1;
     private void HandleGroupClick(Guid questionGroupId)
     {
         NavigationManager.NavigateTo($"/statistic/{questionGroupId}");
