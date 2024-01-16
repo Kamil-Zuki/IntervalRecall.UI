@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace IntervalRecall.UI.Pages
 {
-    public class QuestionGroupBaseSetting : ComponentBase
+    public class QuestionGroupSettingBase : ComponentBase
     {
         [Inject]
         public IQuestionGroupService QuestionGroupService { get; set; }
