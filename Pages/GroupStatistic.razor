@@ -15,10 +15,11 @@
     else
     {
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="toast-header">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Groups</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +28,7 @@
                     <tr>
                         <th scope="row">@i</th>
                         <th @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</th>
-                        <td><button type="button" class="btn btn-danger" @onclick="() => RemoveStatisticAsync(questionGroup.Id)">Remove progress</button>
-
-                    </td>
+                        <td><button type="button" class="btn btn-danger" @onclick="() => RemoveStatisticAsync(questionGroup.Id)">Remove progress</button></td>
                     </tr>
                     i++;
                 }

@@ -33,7 +33,7 @@
                         <td @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</td>
                         <td>@questionAmountInfo!.NewQuestions</td>
                         <td>@questionAmountInfo!.LearnAndGraduatedQuestions</td>
-                        <td><button onclick="" type="button" class="btn btn-primary">Setting</button></td>
+                        <td><button @onclick="() => ClickSettingButton(questionGroup.Id)" type="button" class="btn btn-primary">Setting</button></td>
                     </tr>
                     i++;
                 }
@@ -46,7 +46,7 @@
     private int i = 1;
     private void ClickSettingButton(Guid questionGroupId)
     {
-        NavigationManager.NavigateTo($"/questions/{questionGroupId}");
+        NavigationManager.NavigateTo($"/question-group-settings/{questionGroupId}");
     }
 
     private void HandleGroupClick(Guid questionGroupId)

@@ -1,6 +1,28 @@
-﻿@page "/question-group-setting/{questionGroupId:guid}"
+﻿@page "/question-group-settings/{questionGroupId:guid}"
 @inherits QuestionGroupSettingBase
 
-
+<div class="container mt-3">
+    @if (QuestionGroup == null)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"/>
+        </div>
+    }
+    else
+    {
+        <form>
+            <div class="row">
+                <div class="col">
+                    <h4>New questions/day</h4>
+                    <input type="text" class="form-control" value="@QuestionGroup.AmountOfNew">
+                </div>
+                <div class="col">
+                    <h4>Maximum reviews/day</h4>
+                    <input type="text" class="form-control" value="@QuestionGroup.AmountOfLearn">
+                </div>
+            </div>
+        </form>
+    }
+</div>
 
 

@@ -9,12 +9,12 @@ namespace IntervalRecall.UI.Pages
         [Inject]
         public IQuestionGroupService QuestionGroupService { get; set; }
 
-        public OutQuestionGroupDTO QuestionGroupStatistics { get; set; }
+        public OutQuestionGroupDTO QuestionGroup { get; set; }
         [Parameter]
         public Guid QuestionGroupId { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            QuestionGroupStatistics = await QuestionGroupService.GetGroupByIdAsync(QuestionGroupId);
+            QuestionGroup = await QuestionGroupService.GetGroupByIdAsync(QuestionGroupId);
         }
     }
 }
