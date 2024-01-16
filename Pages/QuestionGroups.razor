@@ -43,6 +43,7 @@
                             <div class="col text-center">
                                 <h4>@questionAmountInfo!.LearnAndGraduatedQuestions</h4>
                             </div>
+                            <button onclick="" type="button" class="btn btn-primary">Setting</button>
                         </div>
                     </div>
                 }
@@ -52,7 +53,10 @@
 </div>
 
 @code {
-
+    private void ClickSettingButton(Guid questionGroupId)
+    {
+        NavigationManager.NavigateTo($"/questions/{questionGroupId}");
+    }
 
     private void HandleGroupClick(Guid questionGroupId)
     {

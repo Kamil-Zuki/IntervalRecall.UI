@@ -13,7 +13,7 @@ namespace IntervalRecall.UI.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<List<OutQuestionGroupDTO>> GetGroups()
+        public async Task<List<OutQuestionGroupDTO>> GetAllGroupsAsync()
         {
             try
             {
@@ -26,7 +26,19 @@ namespace IntervalRecall.UI.Services
             }
         }
 
-        public async Task<HttpResponseMessage> UpdateQuestionGroup(UpdateQuestionGroupDTO updateQuestionGroupDTO) 
+        public async Task<OutQuestionGroupDTO> GetGroupByIdAsync(Guid id)
+        {
+            try
+            {
+                return await httpClient.GetFromJsonAsync<OutQuestionGroupDTO>($"api/v1/question-groups?questionGroupId={id}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public async Task<HttpResponseMessage> UpdateQuestionGroup(OutQuestionGroupDTO updateQuestionGroupDTO) 
         {
             try
             {

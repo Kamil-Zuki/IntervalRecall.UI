@@ -2,7 +2,6 @@
 @inherits QuestionsBase
 @inject NavigationManager NavigationManager
 
-
 <div class="container mt-3">
     @if (QuestionGroups == null)
     {
@@ -45,14 +44,7 @@
     }
 </div>
 
-
-
 @code {
-    private int CountNew(List<OutQuestionDTO> questions)
-        => questions.Where(q => q.State == "New").Count();
-
-    private int CountLearn(List<OutQuestionDTO> questions)
-    => questions.Where(q => q.State == "Learning" || q.State == "Graduated").Count();
 
     private void HandleGroupClick(Guid questionGroupId)
     {

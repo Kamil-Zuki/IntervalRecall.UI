@@ -12,10 +12,14 @@ namespace IntervalRecall.UI.Pages
         [Inject]
         public IStatisticService StatisticService { get; set; }
 
+        [Inject]
+        public IQuestionGroupService QuestionGroupService { get; set; }
+
         [Parameter]
         public Guid? QuestionGroupId { get; set; }  // Add a parameter to receive the questionGroupId
 
         public List<OutRecallQuestionGroupDTO> QuestionGroups { get; set; }
+
         public List<QuestionsAmountInfoWithGroupId> QuestionsAmountInfo { get; set; }
         protected override async Task OnInitializedAsync()
         {
@@ -31,6 +35,8 @@ namespace IntervalRecall.UI.Pages
                     LearnAndGraduatedQuestions = questionAmountInfo.LearnAndGraduatedQuestions
                 });
             }
+            
+
         }
     }
 }

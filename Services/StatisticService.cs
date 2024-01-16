@@ -11,7 +11,7 @@ namespace IntervalRecall.UI.Services
         {
             this.httpClient = httpClient;
         }
-        public async Task<List<QuestionGroupStatistic>> GetStatisticAsync(Guid? questionGroupId)
+        public async Task<List<QuestionGroupStatistic>> GetStatisticAsync(Guid questionGroupId)
         {
             try
             {
