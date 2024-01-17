@@ -1,5 +1,7 @@
 ﻿@page "/question-group-settings/{questionGroupId:guid}"
 @inherits QuestionGroupSettingBase
+@inject IJSRuntime JsRuntime
+
 
 <div class="container mt-3">
     @if (QuestionGroup == null)
@@ -49,10 +51,9 @@
     }
 </div>
 
-
-
 @code {
-    HttpResponseMessage? responce;
+    private bool isVisible = false;
+
     private async Task UpdateQuestionGroup()
     {
         responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
