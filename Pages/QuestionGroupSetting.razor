@@ -5,24 +5,57 @@
     @if (QuestionGroup == null)
     {
         <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status"/>
+            <div class="spinner-border" role="status" />
         </div>
     }
     else
     {
+        <p><small>@QuestionGroup.Title</small></p>
+        <hr class="mt-2 mb-3" />
         <form>
             <div class="row">
-                <div class="col">
-                    <h4>New questions/day</h4>
-                    <input type="text" class="form-control" value="@QuestionGroup.AmountOfNew">
-                </div>
-                <div class="col">
-                    <h4>Maximum reviews/day</h4>
-                    <input type="text" class="form-control" value="@QuestionGroup.AmountOfLearn">
+                <div class="row">
+                    <h3>Daily Limits</h3>
+                    <div class="form-outline w-25">
+                        <label for="amountOfNew" class="col-form-label">Maximum new/day</label>
+                        <input id="amountOfNew" type="text" class="form-control" @bind="QuestionGroup.AmountOfNew">
+                    </div>
+
+                    <div class="form-outline w-25">
+                        <label for="amountOfLearn" class="col-form-label">Maximum reviews/day</label>
+                        <input id="amountOfLearn" type="text" class="form-control" @bind="QuestionGroup.AmountOfLearn">
+                    </div>
                 </div>
             </div>
+            <br/>
+
+            <div class="row">
+                <div class="row">
+                    <h3>Advanced</h3>
+                    <div class="form-outline w-25">
+                        <label for="easyBonus" class="col-form-label">Easy bonus</label>
+                        <input id="easyBonus" type="text" class="form-control" @bind="QuestionGroup.EasyBonus">
+                    </div>
+
+                    <div class="form-outline w-25">
+                        <label for="intervalModifier" class="col-form-label">Interval modifier</label>
+                        <input id="intervalModifier" type="text" class="form-control" @bind="QuestionGroup.IntervalModifier">
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <button type="submit" @onclick="UpdateQuestionGroup" class="btn btn-primary">Save</button>
         </form>
     }
 </div>
+
+@code{
+    private async Task UpdateQuestionGroup()
+    {
+        HttpResponseMessage? responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
+        if (!responce.IsSuccessStatusCode)
+            throw new Exception("The data could not be updated");
+    }
+}
 
 
