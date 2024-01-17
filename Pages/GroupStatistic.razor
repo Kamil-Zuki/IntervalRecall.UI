@@ -15,7 +15,7 @@
     else
     {
         <table class="table">
-            <thead class="toast-header">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Groups</th>
@@ -27,7 +27,7 @@
                 {
                     <tr>
                         <th scope="row">@i</th>
-                        <th @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</th>
+                        <td @onclick="() => HandleGroupClick(questionGroup.Id)" scope="row">@questionGroup.Title</td>
                         <td><button type="button" class="btn btn-danger" @onclick="() => RemoveStatisticAsync(questionGroup.Id)">Remove progress</button></td>
                     </tr>
                     i++;

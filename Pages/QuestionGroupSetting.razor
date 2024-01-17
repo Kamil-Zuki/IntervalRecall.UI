@@ -12,7 +12,7 @@
     {
         <p><small>@QuestionGroup.Title</small></p>
         <hr class="mt-2 mb-3" />
-        <form>
+        <form @onsubmit="UpdateQuestionGroup">
             <div class="row">
                 <div class="row">
                     <h3>Daily Limits</h3>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <br/>
+            <br />
 
             <div class="row">
                 <div class="row">
@@ -43,16 +43,19 @@
                     </div>
                 </div>
             </div>
-            <br/>
-            <button type="submit" @onclick="UpdateQuestionGroup" class="btn btn-primary">Save</button>
+            <br />
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     }
 </div>
 
-@code{
+
+
+@code {
+    HttpResponseMessage? responce;
     private async Task UpdateQuestionGroup()
     {
-        HttpResponseMessage? responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
+        responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
         if (!responce.IsSuccessStatusCode)
             throw new Exception("The data could not be updated");
     }
