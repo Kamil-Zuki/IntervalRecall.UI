@@ -1,4 +1,5 @@
 ﻿using interval_recall.Models.DTOs;
+using IntervalRecall.UI.Services;
 using IntervalRecall.UI.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
@@ -16,8 +17,7 @@ namespace IntervalRecall.UI.Pages
         public IQuestionGroupService QuestionGroupService { get; set; }
 
         [Parameter]
-        public Guid? QuestionGroupId { get; set; }  // Add a parameter to receive the questionGroupId
-
+        public Guid? QuestionGroupId { get; set; }
         public List<OutRecallQuestionGroupDTO> QuestionGroups { get; set; }
 
         public List<QuestionsAmountInfoWithGroupId> QuestionsAmountInfo { get; set; }

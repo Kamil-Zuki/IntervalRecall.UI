@@ -52,11 +52,10 @@
 </div>
 
 @code {
-    private bool isVisible = false;
 
     private async Task UpdateQuestionGroup()
     {
-        responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
+        var responce = await QuestionGroupService.UpdateQuestionGroup(QuestionGroup);
         if (!responce.IsSuccessStatusCode)
             throw new Exception("The data could not be updated");
     }

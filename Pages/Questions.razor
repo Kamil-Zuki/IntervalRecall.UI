@@ -1,11 +1,15 @@
 ﻿@page "/questions/{questiongroupid:guid}"
 @page "/questions"
+@using IntervalRecall.UI.Services
+
 @inherits QuestionsBase
 @inject NavigationManager NavigationManager
-
+@inject StateContainer StateContainer
 
 <div class="container mt-5">
-    @{questionNumber=1;}
+    @{
+        questionNumber = 1;
+    }
     @if (QuestionGroups == null)
     {
         <div class="d-flex justify-content-center">
@@ -55,7 +59,7 @@
 @code {
     private int questionNumber = 1;
     Dictionary<(Guid, Guid), List<Guid>> selectedAnswers = new Dictionary<(Guid, Guid), List<Guid>>();
-    SubmissionResult? resultObject = new();
+    List<QuestionResponseInfo>? questionResponceInfo = new();
     bool isSubmissionInProgress = false;
 
     void ToggleAnswer(Guid questionGroupId, Guid questionId, Guid answerId)
@@ -99,15 +103,18 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    resultObject = await response.Content.ReadFromJsonAsync<SubmissionResult>();
-                    if (resultObject != null)
-                        NavigationManager.NavigateTo($"/responce/{resultObject.Correct}/{resultObject.Incorrect}");
+                    questionResponceInfo = await response.Content.ReadFromJsonAsync<List<QuestionResponseInfo>>();
+                    if (questionResponceInfo != null)
+                    {
+                        StateContainer.QuestionResponseInfo = questionResponceInfo;
+                        NavigationManager.NavigateTo($"/progress");
+                    }
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"Failed with status code: {response.StatusCode}. Error message: {errorMessage}");
-                    NavigationManager.NavigateTo($"/responce/{resultObject.Correct}/{resultObject.Incorrect}");
+                    // NavigationManager.NavigateTo($"/exams");
                 }
 
             }

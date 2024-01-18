@@ -17,6 +17,7 @@ namespace IntervalRecall.UI
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<IQuestionGroupService, QuestionGroupService>();
             builder.Services.AddScoped<IStatisticService, StatisticService>();
+            builder.Services.AddSingleton<StateContainer>();
 
             await builder.Build().RunAsync();
         }

@@ -1,5 +1,44 @@
 ﻿@page "/progress"
+@using System.Text.Json
+@using IntervalRecall.UI.Services
+@inject StateContainer StateContainer
+
+<div class="container mt-3">
+    @if (StateContainer.QuestionResponseInfo == null)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
+    }
+    else
+    {
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Repetitions</th>
+                    <th scope="col">Next Repetition Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var questionResponce in StateContainer.QuestionResponseInfo)
+                {
+                    @* var questionAmountInfo = QuestionsAmountInfo.FirstOrDefault(q => q.GroupId == questionGroup.Id); *@
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td scope="row">@questionResponce.Text</td>
+                        <td scope="row">@questionResponce.Repetitions</td>
+                        <td scope="row">@questionResponce.RepetitionDate</td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    }
+</div>
 
 @code {
-
+    private int i = 1;
 }
