@@ -18,6 +18,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Question</th>
+                    <th scope="col">Decision Quality</th>
+                    <th scope="col">Amount correct/incorrect</th>
                     <th scope="col">Repetitions</th>
                     <th scope="col">Next Repetition Date</th>
                 </tr>
@@ -25,10 +27,11 @@
             <tbody>
                 @foreach (var questionResponce in StateContainer.QuestionResponseInfo)
                 {
-                    @* var questionAmountInfo = QuestionsAmountInfo.FirstOrDefault(q => q.GroupId == questionGroup.Id); *@
                     <tr>
                         <th scope="row">@i</th>
                         <td scope="row">@questionResponce.Text</td>
+                        <td scope="row">@questionResponce.DecisionQualities.Last().Value</td>
+                        <td scope="row">@CountCorrectAnswers(questionResponce.DecisionQualities.ToList())/@CountIncorrectAnswers(questionResponce.DecisionQualities.ToList())</td>
                         <td scope="row">@questionResponce.Repetitions</td>
                         <td scope="row">@questionResponce.RepetitionDate</td>
                     </tr>
@@ -41,4 +44,13 @@
 
 @code {
     private int i = 1;
+
+    private int CountCorrectAnswers(List<DecisionQualityDTO> decisionQualityDTOs)
+    {
+        return decisionQualityDTOs.Count(q => q.Value == true);
+    }
+    private int CountIncorrectAnswers(List<DecisionQualityDTO> decisionQualityDTOs)
+    {
+        return decisionQualityDTOs.Count(q => q.Value != true);
+    }
 }
